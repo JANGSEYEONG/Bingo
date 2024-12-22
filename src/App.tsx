@@ -1,8 +1,8 @@
-import './App.css';
-import { Button } from './components/ui/button';
+import router from './routes/routes';
+import { RouterProvider } from 'react-router';
 
 function App() {
-  return <Button>ㅇㅇ</Button>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
