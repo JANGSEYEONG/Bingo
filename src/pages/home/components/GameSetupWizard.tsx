@@ -1,60 +1,82 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
+
+import BoardSizeStep from '@/components/gameSetup/BoardSizeStep';
+import MemberSelectStep from '@/components/gameSetup/MemberSelectStep';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+
 const GameSetupWizard = () => {
+  const [currentStep, setCurrentStep] = useState<1 | 2>(1);
   const [selectedSize, setSelectedSize] = useState<3 | 4 | 5>(5);
   const navigate = useNavigate();
+
+  const handleNext = () => {
+    setCurrentStep(2);
+  };
 
   const handleStart = () => {
     navigate('/game', { state: { boardSize: selectedSize } });
   };
+
   return (
     <Card className="border-2">
       <CardHeader>
-        <CardTitle className="text-xl">게임 설정</CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-xl">게임 설정</CardTitle>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  onClick={() => setCurrentStep(1)}
+                  className={
+                    currentStep === 1 ? 'font-semibold text-foreground' : 'text-muted-foreground'
+                  }>
+                  1. 보드 크기
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink
+                  onClick={() => setCurrentStep(2)}
+                  className={
+                    currentStep === 2 ? 'font-semibold text-foreground' : 'text-muted-foreground'
+                  }>
+                  2. 이름 선택
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
       </CardHeader>
-      <CardContent className="space-y-6">
-        {/* 보드 크기 선택 */}
-        <div>
-          <label className="mb-2 block text-sm font-medium">보드 크기 선택</label>
-          <div className="flex justify-center gap-3">
-            {[3, 4, 5].map((size) => (
-              <Button
-                key={size}
-                variant={selectedSize === size ? 'default' : 'outline'}
-                className="relative h-24 w-full p-2"
-                onClick={() => setSelectedSize(size as 3 | 4 | 5)}>
-                <div className="flex flex-col items-center gap-2">
-                  <div
-                    className="grid gap-1"
-                    style={{
-                      gridTemplateColumns: `repeat(${size}, minmax(0, 1fr))`,
-                    }}>
-                    {Array(size * size)
-                      .fill(null)
-                      .map((_, i) => (
-                        <div
-                          key={i}
-                          className={`h-2 w-2 rounded-sm ${
-                            selectedSize === size ? 'bg-white' : 'bg-foreground/20'
-                          }`}
-                        />
-                      ))}
-                  </div>
-                  <span className="text-sm">
-                    {size}×{size}
-                  </span>
-                </div>
-              </Button>
-            ))}
-          </div>
+      <CardContent className="flex h-[380px] flex-col">
+        <div className="flex-1">
+          {currentStep === 1 ? (
+            <BoardSizeStep selectedSize={selectedSize} onSizeSelect={setSelectedSize} />
+          ) : (
+            <MemberSelectStep requiredCount={selectedSize * selectedSize} />
+          )}
         </div>
 
-        {/* 시작 버튼 */}
-        <Button size="lg" onClick={handleStart} className="w-full" variant="default">
-          게임 시작하기
-        </Button>
+        <div className="mt-6">
+          {currentStep === 1 ? (
+            <Button size="lg" variant="outline" onClick={handleNext} className="w-full">
+              다음
+            </Button>
+          ) : (
+            <Button size="lg" onClick={handleStart} className="w-full">
+              게임 시작하기
+            </Button>
+          )}
+        </div>
       </CardContent>
     </Card>
   );

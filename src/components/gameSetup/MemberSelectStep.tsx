@@ -1,5 +1,69 @@
-const NameSelectStep = () => {
-  return <div></div>;
+import { useState } from 'react';
+
+import { Shuffle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+
+import { MEMBER_LIST } from '@/constants/member';
+
+interface MemberSelectStepProps {
+  requiredCount: number;
+}
+
+const MemberSelectStep = ({ requiredCount }: MemberSelectStepProps) => {
+  const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
+
+  const handleMemberClick = (member: string) => {
+    setSelectedMembers((prev) =>
+      prev.includes(member)
+        ? prev.filter((m) => m !== member)
+        : prev.length < requiredCount
+          ? [...prev, member]
+          : prev,
+    );
+  };
+
+  const handleRandomSelect = () => {
+    // 이전 선택과 관계없이 새로운 랜덤 선택으로 완전히 대체
+    const shuffled = [...MEMBER_LIST].sort(() => Math.random() - 0.5);
+    setSelectedMembers(shuffled.slice(0, requiredCount));
+  };
+
+  return (
+    <div className="flex h-full flex-col gap-y-2">
+      <div className="flex shrink-0 items-center justify-between">
+        <label className="font-medium">
+          2. 빙고 이름 선택 ({selectedMembers.length}/{requiredCount}명)
+        </label>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleRandomSelect}
+          className="flex items-center gap-1">
+          <Shuffle className="h-4 w-4" />
+          랜덤으로 선택
+        </Button>
+      </div>
+
+      <ScrollArea className="h-64 rounded-md border bg-slate-50">
+        <div className="grid grid-cols-3 gap-2 p-3">
+          {MEMBER_LIST.sort().map((member) => (
+            <Button
+              key={member}
+              variant={selectedMembers.includes(member) ? 'default' : 'outline'}
+              size="sm"
+              className="w-full"
+              onClick={() => handleMemberClick(member)}
+              disabled={
+                !selectedMembers.includes(member) && selectedMembers.length >= requiredCount
+              }>
+              {member}
+            </Button>
+          ))}
+        </div>
+      </ScrollArea>
+    </div>
+  );
 };
 
-export default NameSelectStep;
+export default MemberSelectStep;

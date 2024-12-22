@@ -5,7 +5,7 @@ import GameSetupWizard from './components/GameSetupWizard';
 const HomePage = () => {
   return (
     <div className="px-4 py-8">
-      <div className="space-y-8">
+      <div className="space-y-5">
         {/* 상단 환영 메시지 */}
         <Greeting />
         {/* 게임 룰 */}
