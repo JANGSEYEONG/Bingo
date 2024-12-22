@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Shuffle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -8,25 +6,28 @@ import { MEMBER_LIST } from '@/constants/member';
 
 interface MemberSelectStepProps {
   requiredCount: number;
+  selectedMembers: string[];
+  onMembersChange: (members: string[]) => void;
 }
 
-const MemberSelectStep = ({ requiredCount }: MemberSelectStepProps) => {
-  const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
-
+const MemberSelectStep = ({
+  requiredCount,
+  selectedMembers,
+  onMembersChange,
+}: MemberSelectStepProps) => {
   const handleMemberClick = (member: string) => {
-    setSelectedMembers((prev) =>
-      prev.includes(member)
-        ? prev.filter((m) => m !== member)
-        : prev.length < requiredCount
-          ? [...prev, member]
-          : prev,
+    onMembersChange(
+      selectedMembers.includes(member)
+        ? selectedMembers.filter((m) => m !== member)
+        : selectedMembers.length < requiredCount
+          ? [...selectedMembers, member]
+          : selectedMembers,
     );
   };
 
   const handleRandomSelect = () => {
-    // 이전 선택과 관계없이 새로운 랜덤 선택으로 완전히 대체
     const shuffled = [...MEMBER_LIST].sort(() => Math.random() - 0.5);
-    setSelectedMembers(shuffled.slice(0, requiredCount));
+    onMembersChange(shuffled.slice(0, requiredCount));
   };
 
   return (

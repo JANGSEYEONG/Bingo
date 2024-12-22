@@ -16,7 +16,8 @@ import {
 
 const GameSetupWizard = () => {
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
-  const [selectedSize, setSelectedSize] = useState<3 | 4 | 5>(5);
+  const [selectedSize, setSelectedSize] = useState<3 | 4 | 5>(3);
+  const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
   const navigate = useNavigate();
 
   const handleNext = () => {
@@ -24,7 +25,12 @@ const GameSetupWizard = () => {
   };
 
   const handleStart = () => {
-    navigate('/game', { state: { boardSize: selectedSize } });
+    navigate('/game', {
+      state: {
+        boardSize: selectedSize,
+        selectedMembers: selectedMembers, // MemberSelectStep에서 선택한 멤버들
+      },
+    });
   };
 
   return (
@@ -62,7 +68,11 @@ const GameSetupWizard = () => {
           {currentStep === 1 ? (
             <BoardSizeStep selectedSize={selectedSize} onSizeSelect={setSelectedSize} />
           ) : (
-            <MemberSelectStep requiredCount={selectedSize * selectedSize} />
+            <MemberSelectStep
+              requiredCount={selectedSize * selectedSize}
+              selectedMembers={selectedMembers}
+              onMembersChange={setSelectedMembers}
+            />
           )}
         </div>
 
@@ -72,7 +82,11 @@ const GameSetupWizard = () => {
               다음
             </Button>
           ) : (
-            <Button size="lg" onClick={handleStart} className="w-full">
+            <Button
+              size="lg"
+              onClick={handleStart}
+              className="w-full"
+              disabled={selectedMembers.length !== Math.pow(selectedSize, 2)}>
               게임 시작하기
             </Button>
           )}

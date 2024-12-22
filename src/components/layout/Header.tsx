@@ -17,7 +17,7 @@ const Header = () => {
             <span className="font-bold">2024 GN 종무식</span>
           </div>
           {!isHome && (
-            <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
+            <Button variant="outline" size="sm" onClick={() => navigate('/')}>
               <Home className="h-5 w-5" />
             </Button>
           )}
