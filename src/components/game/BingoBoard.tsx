@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/card';
+import BingoCard from './BingoCard';
 
 interface BingoBoardProps {
   size: number;
@@ -8,7 +8,6 @@ interface BingoBoardProps {
 }
 
 const BingoBoard = ({ size, members, onBingoChange }: BingoBoardProps) => {
-  // Initialize board with shuffled members
   const [board] = useState(() =>
     [...members].sort(() => Math.random() - 0.5).slice(0, size * size),
   );
@@ -75,7 +74,7 @@ const BingoBoard = ({ size, members, onBingoChange }: BingoBoardProps) => {
   return (
     <div className="mx-auto w-full max-w-sm px-1 sm:px-2">
       <div
-        className="grid gap-0.5 sm:gap-1"
+        className="grid aspect-square gap-0.5 sm:gap-1"
         style={{
           gridTemplateColumns: `repeat(${size}, 1fr)`,
         }}>
@@ -86,12 +85,15 @@ const BingoBoard = ({ size, members, onBingoChange }: BingoBoardProps) => {
           const isInBingoLine = isCellInBingoLine(row, col);
 
           return (
-            <Card
+            <BingoCard
               key={`${row}-${col}`}
-              className={`xs:p-1 xs:text-sm flex aspect-square cursor-pointer items-center justify-center p-0.5 text-center text-xs transition-colors duration-200 sm:text-base ${isSelected ? 'bg-blue-100' : 'bg-white hover:bg-gray-50'} ${isInBingoLine ? 'bg-green-200 hover:bg-green-200' : ''} break-all`}
-              onClick={() => toggleCell(row, col)}>
-              {member}
-            </Card>
+              row={row}
+              col={col}
+              member={member}
+              isSelected={isSelected}
+              isInBingoLine={isInBingoLine}
+              toggleCell={toggleCell}
+            />
           );
         })}
       </div>
