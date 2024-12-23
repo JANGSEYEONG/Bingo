@@ -33,7 +33,7 @@ const MemberSelectStep = ({
   return (
     <div className="flex h-full flex-col gap-y-2">
       <div className="flex shrink-0 items-center justify-between">
-        <label className="font-medium">
+        <label className="text-sm font-medium">
           GN 피플 이름 선택 ({selectedMembers.length}/{requiredCount}명)
         </label>
         <Button

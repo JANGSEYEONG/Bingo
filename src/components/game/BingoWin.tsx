@@ -1,5 +1,5 @@
 import { BINGO_TO_WIN } from '@/constants/game';
-import ConfettiDecoration from '../ui/confetti';
+import ConfettiDecoration from '../common/ConfettiDecoration';
 
 interface BingoWinProps {
   bingoCount: number;

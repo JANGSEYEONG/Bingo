@@ -9,7 +9,7 @@ const Header = () => {
           <div className="flex items-center">
             <img
               src={GNLogoUrl}
-              width={100}
+              width={80}
               alt="GN Logo"
               className="transition-opacity hover:opacity-90"
             />
@@ -18,7 +18,7 @@ const Header = () => {
           {/* 행사명 - 중앙 */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
             <div className="space-y-1">
-              <h1 className="text-xl font-bold tracking-wide">2024 GN 종무식</h1>
+              <h1 className="text-xl font-bold tracking-wide">2024 종무식</h1>
               <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-gray-400 to-transparent" />
             </div>
           </div>
