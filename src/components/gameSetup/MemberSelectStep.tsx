@@ -34,7 +34,7 @@ const MemberSelectStep = ({
     <div className="flex h-full flex-col gap-y-2">
       <div className="flex shrink-0 items-center justify-between">
         <label className="font-medium">
-          2. 빙고 이름 선택 ({selectedMembers.length}/{requiredCount}명)
+          GN 피플 이름 선택 ({selectedMembers.length}/{requiredCount}명)
         </label>
         <Button
           variant="outline"

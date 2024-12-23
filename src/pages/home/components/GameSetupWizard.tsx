@@ -6,17 +6,18 @@ import MemberSelectStep from '@/components/gameSetup/MemberSelectStep';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
+// import {
+//   Breadcrumb,
+//   BreadcrumbList,
+//   BreadcrumbItem,
+//   BreadcrumbLink,
+//   BreadcrumbSeparator,
+// } from '@/components/ui/breadcrumb';
 
 const GameSetupWizard = () => {
-  const [currentStep, setCurrentStep] = useState<1 | 2>(1);
-  const [selectedSize, setSelectedSize] = useState<3 | 4 | 5>(3);
+  // #20241223.syjang, 빙고 사이즈는 5*5로 무조건 고정되게 처리 (한나님 요청)
+  const [currentStep, setCurrentStep] = useState<1 | 2>(2);
+  const [selectedSize, setSelectedSize] = useState<3 | 4 | 5>(5);
   const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
   const navigate = useNavigate();
 
@@ -38,7 +39,7 @@ const GameSetupWizard = () => {
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl">게임 설정</CardTitle>
-          <Breadcrumb>
+          {/* <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink
@@ -60,7 +61,7 @@ const GameSetupWizard = () => {
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
+          </Breadcrumb> */}
         </div>
       </CardHeader>
       <CardContent className="flex h-[380px] flex-col">
