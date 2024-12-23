@@ -1,7 +1,9 @@
-import { useLocation } from 'react-router';
-import BingoStatus from '@/components/game/BingoStatus';
-import BingoBoard from '@/components/game/BingoBoard';
 import { useState } from 'react';
+import { useLocation } from 'react-router';
+
+import BingoWin from '@/components/game/BingoWin';
+import BingoBoard from '@/components/game/BingoBoard';
+import BingoStatus from '@/components/game/BingoStatus';
 
 interface GameState {
   boardSize: number;
@@ -20,6 +22,7 @@ const GamePage = () => {
     <div className="flex w-full flex-col gap-6">
       <BingoStatus bingoCount={bingoCount} />
       <BingoBoard size={boardSize} members={selectedMembers} onBingoChange={handleBingoChange} />
+      <BingoWin bingoCount={bingoCount} />
     </div>
   );
 };

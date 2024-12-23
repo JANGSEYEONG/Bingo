@@ -1,6 +1,6 @@
 const Rules = () => {
   return (
-    <div className="rounded-lg bg-muted p-4 text-sm">
+    <div className="rounded-lg bg-white p-4 text-sm">
       <p className="mb-2 font-semibold">게임 룰 💡</p>
       <ul className="list-inside list-disc space-y-1 text-muted-foreground">
         <li>GN인들의 이름을 선택하거나 랜덤으로 배정해요</li>
