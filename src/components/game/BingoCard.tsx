@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { Card } from '../ui/card';
+import { useState } from 'react';
 
 interface BingoCardProps {
   row: number;
@@ -11,7 +12,7 @@ interface BingoCardProps {
 }
 
 const BingoCard = ({ row, col, member, isSelected, isInBingoLine, toggleCell }: BingoCardProps) => {
-  const imageUrl = 'https://picsum.photos/200/300';
+  const [imageError, setImageError] = useState(false);
 
   return (
     <div className="relative h-full w-full perspective-1000" onClick={() => toggleCell(row, col)}>
@@ -26,7 +27,6 @@ const BingoCard = ({ row, col, member, isSelected, isInBingoLine, toggleCell }: 
           className={cn(
             'xs:p-1 xs:text-sm absolute inset-0 flex aspect-square cursor-pointer items-center justify-center p-0.5 text-xs sm:text-base',
             !isSelected && 'hover:bg-gray-50',
-            isInBingoLine && 'bg-green-200 hover:bg-green-200',
             'break-all',
           )}
           style={{ backfaceVisibility: 'hidden' }}>
@@ -35,12 +35,27 @@ const BingoCard = ({ row, col, member, isSelected, isInBingoLine, toggleCell }: 
 
         {/* 뒷면 */}
         <Card
-          className="absolute inset-0 flex aspect-square cursor-pointer items-center justify-center overflow-hidden p-1"
+          className={cn(
+            'absolute inset-0 flex aspect-square cursor-pointer items-center justify-center overflow-hidden p-1 text-xs',
+            isSelected && 'bg-blue-100',
+            isInBingoLine && 'bg-green-100 hover:bg-green-200',
+          )}
           style={{
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
           }}>
-          <img src={imageUrl} alt={member} className="h-full w-full rounded object-cover" />
+          {!imageError ? (
+            <img
+              src={`/assets/people/${member}.webp`}
+              alt={member}
+              className="h-full w-full rounded object-cover"
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center p-2 text-center">
+              {member}
+            </div>
+          )}
         </Card>
       </div>
     </div>
