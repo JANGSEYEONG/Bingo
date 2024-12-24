@@ -36,7 +36,7 @@ const BingoCard = ({ row, col, member, isSelected, isInBingoLine, toggleCell }: 
         {/* 뒷면 */}
         <Card
           className={cn(
-            'absolute inset-0 flex aspect-square cursor-pointer items-center justify-center overflow-hidden p-1 text-xs',
+            'absolute inset-0 flex aspect-square cursor-pointer items-center justify-center overflow-hidden text-xs',
             isSelected && 'bg-blue-100',
             isInBingoLine && 'bg-green-100 hover:bg-green-200',
           )}
@@ -45,12 +45,18 @@ const BingoCard = ({ row, col, member, isSelected, isInBingoLine, toggleCell }: 
             transform: 'rotateY(180deg)',
           }}>
           {!imageError ? (
-            <img
-              src={`/assets/people/${member}.webp`}
-              alt={member}
-              className="h-full w-full rounded object-cover"
-              onError={() => setImageError(true)}
-            />
+            <>
+              <img
+                src="https://picsum.photos/200"
+                // src={`/assets/people/${member}.webp`}
+                alt={member}
+                className="h-full w-full rounded object-cover"
+                onError={() => setImageError(true)}
+              />
+              <p className="absolute bottom-0 w-full text-center text-white backdrop-blur">
+                {member}
+              </p>
+            </>
           ) : (
             <div className="flex h-full w-full items-center justify-center p-2 text-center">
               {member}
