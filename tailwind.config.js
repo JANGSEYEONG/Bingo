@@ -53,6 +53,33 @@ export default {
           5: 'hsl(var(--chart-5))',
         },
       },
+      keyframes: {
+        'scale-bounce': {
+          '0%': { transform: 'scale(0)' },
+          '50%': { transform: 'scale(1.5)' },
+          '100%': { transform: 'scale(0)' },
+        },
+        'text-shimmer': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '100% 50%' },
+        },
+        rainbow: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        aurora: {
+          '0%': { backgroundSize: '200% 200%', backgroundPosition: '0% 0%' },
+          '50%': { backgroundSize: '200% 200%', backgroundPosition: '100% 100%' },
+          '100%': { backgroundSize: '200% 200%', backgroundPosition: '0% 0%' },
+        },
+        animation: {
+          'text-shimmer': 'text-shimmer 2s linear infinite',
+          rainbow: 'rainbow 3s linear infinite',
+          'rainbow-fast': 'rainbow 2s linear infinite',
+          aurora: 'aurora 3s ease infinite',
+        },
+      },
     },
   },
   plugins: [

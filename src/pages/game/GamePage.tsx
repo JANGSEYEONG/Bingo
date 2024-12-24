@@ -4,6 +4,7 @@ import { useLocation } from 'react-router';
 import BingoWin from '@/components/game/BingoWin';
 import BingoBoard from '@/components/game/BingoBoard';
 import BingoStatus from '@/components/game/BingoStatus';
+import BingoAlarm from '@/components/game/BingoAlarm';
 
 interface GameState {
   boardSize: number;
@@ -19,10 +20,11 @@ const GamePage = () => {
   };
 
   return (
-    <div className="flex w-full flex-col gap-6">
+    <div className="relative flex w-full flex-col gap-6">
       <BingoStatus bingoCount={bingoCount} />
       <BingoBoard size={boardSize} members={selectedMembers} onBingoChange={handleBingoChange} />
       <BingoWin bingoCount={bingoCount} />
+      <BingoAlarm bingoCount={bingoCount} />
     </div>
   );
 };

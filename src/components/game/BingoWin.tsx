@@ -19,7 +19,9 @@ const BingoWin = ({ bingoCount }: BingoWinProps) => {
           <span className="animate-spin">🎊</span>
         </div>
 
-        <div className="animate-pulse text-lg font-bold text-purple-500">축하합니다! 🎉</div>
+        <div className="animate-pulse text-lg font-bold text-purple-500">
+          "빙고"라고 외쳐주세요!! 🎉
+        </div>
       </div>
       <ConfettiDecoration />
     </div>

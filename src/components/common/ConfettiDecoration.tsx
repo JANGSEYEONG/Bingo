@@ -6,7 +6,7 @@ const ConfettiDecoration = () => {
   const { height } = window.screen;
   return (
     <div>
-      <Confetti width={512} height={height} />
+      <Confetti width={512} height={height} gravity={0.2} />
     </div>
   );
 };
