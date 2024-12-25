@@ -12,6 +12,9 @@ interface BingoCardProps {
 }
 
 const BingoCard = ({ row, col, member, isSelected, isInBingoLine, toggleCell }: BingoCardProps) => {
+  const isDevelopment = import.meta.env.DEV;
+  const imageSrc = isDevelopment ? `https://picsum.photos/200` : `/assets/people/${member}.webp`;
+
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -47,9 +50,8 @@ const BingoCard = ({ row, col, member, isSelected, isInBingoLine, toggleCell }: 
           {!imageError ? (
             <>
               <img
-                src="https://picsum.photos/200"
-                // src={`/assets/people/${member}.webp`}
-                alt={member}
+                src={imageSrc}
+                alt={`Profile of ${member}`}
                 className="h-full w-full rounded object-cover"
                 onError={() => setImageError(true)}
               />

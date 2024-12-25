@@ -1,7 +1,8 @@
 export const messages = {
   1: {
     text: '1빙고! 시작이 좋아요! ✨',
-    style: 'text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.8)]',
+    style:
+      'animate-rainbow-fast bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent',
   },
   2: {
     text: '2빙고! 승리했어요! 🎉',
@@ -54,7 +55,7 @@ export const messages = {
       'animate-text-shimmer bg-[linear-gradient(45deg,theme(colors.fuchsia.400),theme(colors.rose.400),theme(colors.violet.400),theme(colors.fuchsia.400))] bg-clip-text text-transparent',
   },
   12: {
-    text: '모든 칸을 누르는 호기심과 끈기까지..!\n이 게임을 만든 저도 놀랐어요 🎊',
+    text: '모든 칸을 누르는 호기심과 끈기까지..!\n하지만 아무것도 없답니다.. 🎊',
     style:
       'animate-rainbow-fast bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent',
   },
