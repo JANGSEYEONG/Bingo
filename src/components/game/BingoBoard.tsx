@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import BingoCard from './BingoCard';
+import { BingoStateManager } from '@/lib/gameStateManager';
 
 interface BingoBoardProps {
   size: number;
@@ -8,16 +9,35 @@ interface BingoBoardProps {
 }
 
 const BingoBoard = ({ size, members, onBingoChange }: BingoBoardProps) => {
-  const [board] = useState(() =>
-    [...members].sort(() => Math.random() - 0.5).slice(0, size * size),
-  );
+  const [board] = useState(() => {
+    const savedState = BingoStateManager.getGameState();
+    if (savedState) {
+      return savedState.board;
+    }
+    return [...members].sort(() => Math.random() - 0.5).slice(0, size * size);
+  });
 
-  const [selectedCells, setSelectedCells] = useState<boolean[][]>(
-    Array(size)
+  const [selectedCells, setSelectedCells] = useState<boolean[][]>(() => {
+    const savedState = BingoStateManager.getGameState();
+    if (savedState) {
+      return savedState.selectedCells;
+    }
+    return Array(size)
       .fill(null)
-      .map(() => Array(size).fill(false)),
-  );
-  const [bingoLines, setBingoLines] = useState<string[]>([]);
+      .map(() => Array(size).fill(false));
+  });
+  const [bingoLines, setBingoLines] = useState<string[]>(() => {
+    const savedState = BingoStateManager.getGameState();
+    return savedState?.bingoLines || [];
+  });
+
+  useEffect(() => {
+    BingoStateManager.saveGameState({
+      board,
+      selectedCells,
+      bingoLines,
+    });
+  }, [board, selectedCells, bingoLines]);
 
   const checkBingo = () => {
     const newBingoLines: string[] = [];

@@ -55,7 +55,7 @@ const BingoCard = ({ row, col, member, isSelected, isInBingoLine, toggleCell }: 
                 className="h-full w-full rounded object-cover"
                 onError={() => setImageError(true)}
               />
-              <p className="absolute bottom-0 w-full text-center text-white backdrop-blur">
+              <p className="absolute bottom-0 w-full bg-black/20 text-center text-white backdrop-blur">
                 {member}
               </p>
             </>
