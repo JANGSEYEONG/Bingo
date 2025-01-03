@@ -13,7 +13,7 @@ interface BingoCardProps {
 
 const BingoCard = ({ row, col, member, isSelected, isInBingoLine, toggleCell }: BingoCardProps) => {
   const isDevelopment = import.meta.env.DEV;
-  const imageSrc = isDevelopment ? `https://picsum.photos/200` : `/assets/people/${member}.webp`;
+  const imageSrc = isDevelopment ? '/assets/person.png' : `/assets/people/${member}.webp`;
 
   const [imageError, setImageError] = useState(false);
 
